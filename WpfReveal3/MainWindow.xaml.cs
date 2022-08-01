@@ -34,10 +34,10 @@ namespace WpfReveal3
             _revealView.Dashboard = new RVDashboard(filePath);
 
             //Excelファイルを読み込んで、DataGridにBindする
-            ConvertExcelToList();
+            BindExcelToXamDataGrid();
         }
 
-        private void ConvertExcelToList()
+        private void BindExcelToXamDataGrid()
         {
 
             string path = @"Data\Healthcare.xlsx";
