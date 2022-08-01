@@ -42,13 +42,13 @@ namespace WpfReveal3
 
             string path = @"Data\Healthcare.xlsx";
 
-            // 0.テーブル名を指定
+            // Hospital Performanceの読み込み
             string tableName1 = "Hospital Performance";
-            // 1.Excel を開く            
+
             using (var wb = new XLWorkbook(path))
             {
                 var sh = wb.Worksheets.FirstOrDefault(t => t.Name == tableName1);
-                // 2.シートからEFに読み込み
+
                 int row = 2;
                 while (sh.Cell(row, 1).Value.ToString() != "")
                 {
@@ -69,13 +69,13 @@ namespace WpfReveal3
             }
 
 
-            // 0.テーブル名を指定
+            // Patient Dashboardの読み込み
             string tableName2 = "Patient Dashboard";
-            // 1.Excel を開く           
+
             using (var wb = new XLWorkbook(path))
             {
                 var sh = wb.Worksheets.FirstOrDefault(t => t.Name == tableName2);
-                // 2.シートからEFに読み込み
+
                 int row = 2;
                 while (sh.Cell(row, 1).Value.ToString() != "")
                 {
