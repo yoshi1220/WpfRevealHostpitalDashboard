@@ -10,8 +10,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CBE35C49-5300-42A7-A729-84E9FADE514A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfReveal1</RootNamespace>
-    <AssemblyName>WpfReveal1</AssemblyName>
+    <RootNamespace>WpfReveal3</RootNamespace>
+    <AssemblyName>WpfReveal3</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -62,6 +62,9 @@
     <Reference Include="Chart.WPF, Version=1.1.5.0, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\Chart.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.96.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.96.0\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="Core.WPF, Version=1.1.5.0, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\Core.WPF.dll</HintPath>
     </Reference>
@@ -71,8 +74,11 @@
     <Reference Include="CSharpAnalytics.Net45, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\CSharpAnalytics.Net45.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\DocumentFormat.OpenXml.dll</HintPath>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.16.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.16.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics.Reveal.Connector.MsSql.WPF, Version=1.1.5.0, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\Infragistics.Reveal.Connector.MsSql.WPF.dll</HintPath>
@@ -107,12 +113,16 @@
     <Reference Include="Infragistics4.Documents.Reports.v19.2, Version=19.2.20192.241, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\Infragistics4.Documents.Reports.v19.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.DataPresenter.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.DockManager.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.Editors.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="InfragisticsWPF4.Reveal.Documents.Core.v19.2, Version=19.2.20192.9, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\InfragisticsWPF4.Reveal.Documents.Core.v19.2.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.Reveal.Documents.Excel.v19.2, Version=19.2.20192.9, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\InfragisticsWPF4.Reveal.Documents.Excel.v19.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
     </Reference>
@@ -234,6 +244,8 @@
     <Reference Include="UI.WPF, Version=1.1.5.0, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\UI.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -251,12 +263,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClosedXmlRangeConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\HospitalPerformance.cs" />
+    <Compile Include="Models\PatientDashboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

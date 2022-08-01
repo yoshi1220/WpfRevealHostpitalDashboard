@@ -1,0 +1,51 @@
+﻿<Window xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"  xmlns:igDock="http://infragistics.com/DockManager"  x:Class="WpfReveal3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfReveal3"
+        xmlns:rv="http://revealbi.io/"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="980" Width="1800">
+    <Grid>
+        <igDock:XamDockManager Name="xamDockManager1" Theme="Office2013">
+            <igDock:DocumentContentHost>
+                <!--Adding a SplitPane-->
+                <igDock:SplitPane>
+                    <!--Adding a TabGroupPane-->
+                    <igDock:TabGroupPane>
+                        <!--Adding ContentPanes-->
+                        <igDock:ContentPane Header="Hospital Performance">
+                            <igWPF:XamDataGrid x:Name="XamDataGridHospitalPerformance">
+                                <igWPF:XamDataGrid.FieldSettings>
+                                    <igWPF:FieldSettings AllowEdit="False"/>
+                                </igWPF:XamDataGrid.FieldSettings>
+                            </igWPF:XamDataGrid>
+                        </igDock:ContentPane>
+                        <igDock:ContentPane Header="Patient Dashboard">
+                            <igWPF:XamDataGrid x:Name="XamDataGridPatientDashboard">
+                                <igWPF:XamDataGrid.FieldSettings>
+                                    <igWPF:FieldSettings AllowEdit="False"/>
+                                </igWPF:XamDataGrid.FieldSettings>
+                            </igWPF:XamDataGrid>
+                        </igDock:ContentPane>
+                    </igDock:TabGroupPane>
+                </igDock:SplitPane>
+                <igDock:SplitPane>
+                    <!--Adding a TabGroupPane-->
+                    <igDock:TabGroupPane>
+                        <!--Adding ContentPanes-->
+                        <igDock:ContentPane Header="Dashboard">
+                            <rv:RevealView x:Name="_revealView" 
+                                           SaveDashboard="RevealView_SaveDashboard"
+                                           DataSourcesRequested="RevealView_DataSourcesRequested" />
+                        </igDock:ContentPane>
+                    </igDock:TabGroupPane>
+                </igDock:SplitPane>
+            </igDock:DocumentContentHost>
+        </igDock:XamDockManager>
+        <igWPF:XamDataGrid HorizontalAlignment="Left" Margin="2170,1099,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
