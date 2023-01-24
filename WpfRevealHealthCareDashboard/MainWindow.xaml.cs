@@ -1,12 +1,15 @@
 ﻿using ClosedXML.Excel;
+using Infragistics.Themes;
 using Microsoft.Win32;
 using Reveal.Sdk;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 using WpfRevealHealthCareDashboard.Models;
 
@@ -27,6 +30,8 @@ namespace WpfRevealHealthCareDashboard
         {
             InitializeComponent();
 
+            ThemeManager.ApplicationTheme = new Office2013Theme();
+
             //Reveal関連の初期化処理
             _revealView.Dashboard = new RVDashboard();
 
@@ -37,6 +42,16 @@ namespace WpfRevealHealthCareDashboard
 
             //Excelファイルを読み込んで、DataGridにBindする
             BindExcelToXamDataGrid();
+        }
+
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _selectedGenders = new List<object>();
+            var gendersfilter = _revealView.Dashboard.Filters.GetByTitle("gender");
+            var filterValues = await gendersfilter.GetFilterValuesAsync();
+            Genders = new ObservableCollection<RVFilterValue>(filterValues);
+            DataContext = this;
         }
 
         private void BindExcelToXamDataGrid()
@@ -202,8 +217,6 @@ namespace WpfRevealHealthCareDashboard
 
             _from = from;
             _to = to;
-            //fromThumb.Value = _from;
-            //toThumb.Value = _to;
 
             _revealView.Dashboard.DateFilter = filter;
         }
@@ -217,6 +230,31 @@ namespace WpfRevealHealthCareDashboard
         {
             return new DateTime(to.Year, to.Month, 1).AddMonths(1).AddDays(-1);
         }
+
+        public ObservableCollection<RVFilterValue> Genders { get; private set; }
+
+        private List<object> _selectedGenders = new List<object>();
+
+        private void Gender_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as ToggleButton;
+            var selectedItem = btn?.Tag as RVFilterValue;
+            if (selectedItem == null)
+            {
+                return;
+            }
+            if (btn.IsChecked.Value)
+            {
+                _selectedGenders.Add(selectedItem.Value);
+            }
+            else
+            {
+                _selectedGenders.Remove(selectedItem.Value);
+            }
+            var genderFilter = _revealView.Dashboard.Filters.GetByTitle("gender");
+            genderFilter.SelectedValues = _selectedGenders;
+        }
+
     }
 
 

@@ -7,22 +7,20 @@
         xmlns:rv="http://revealbi.io/"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="980" Width="1800">
-    <Grid>
-        <igDock:XamDockManager Name="xamDockManager1" Theme="Office2013">
+        Title="MainWindow" Height="980" Width="1800" Loaded="Window_Loaded">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="265*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="89*"/>
+        </Grid.ColumnDefinitions>
+        <igDock:XamDockManager Name="xamDockManager1"  Theme="Office2013" Grid.ColumnSpan="3">
             <igDock:DocumentContentHost>
                 <!--Adding a SplitPane-->
                 <igDock:SplitPane>
                     <!--Adding a TabGroupPane-->
                     <igDock:TabGroupPane>
                         <!--Adding ContentPanes-->
-                        <igDock:ContentPane Header="Hospital Performance" IsEnabled="True">
-                            <igWPF:XamDataGrid x:Name="XamDataGridHospitalPerformance">
-                                <igWPF:XamDataGrid.FieldSettings>
-                                    <igWPF:FieldSettings AllowEdit="False"/>
-                                </igWPF:XamDataGrid.FieldSettings>
-                            </igWPF:XamDataGrid>
-                        </igDock:ContentPane>
                         <igDock:ContentPane Header="Patient Dashboard">
                             <igWPF:XamDataGrid x:Name="XamDataGridPatientDashboard">
                                 <igWPF:XamDataGrid.FieldSettings>
@@ -30,38 +28,58 @@
                                 </igWPF:XamDataGrid.FieldSettings>
                             </igWPF:XamDataGrid>
                         </igDock:ContentPane>
+                        <igDock:ContentPane Header="Hospital Performance" IsEnabled="True">
+                            <igWPF:XamDataGrid x:Name="XamDataGridHospitalPerformance">
+                                <igWPF:XamDataGrid.FieldSettings>
+                                    <igWPF:FieldSettings AllowEdit="False"/>
+                                </igWPF:XamDataGrid.FieldSettings>
+                            </igWPF:XamDataGrid>
+                        </igDock:ContentPane>
+                       
                     </igDock:TabGroupPane>
                 </igDock:SplitPane>
                 <igDock:SplitPane>
                     <!--Adding a TabGroupPane-->
                     <igDock:TabGroupPane>
                         <!--Adding ContentPanes-->
-                        <igDock:ContentPane Header="Dashboard">
+                        <igDock:ContentPane Header="Patient Dashboard">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="80"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Lavender">
                                     <TextBlock x:Name="lblFrom" Text="From: " FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2"/>
                                     <DatePicker x:Name="fromDate" SelectedDate="1/1/2020" VerticalAlignment="Center" HorizontalAlignment="Left" SelectedDateChanged="fromDate_SelectedDateChanged" Margin="2,2,2,2"/>
                                     <TextBlock x:Name="lblTo" Text="To: " FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2"/>
                                     <DatePicker x:Name="toDate" SelectedDate="12/1/2023" VerticalAlignment="Center" HorizontalAlignment="Left" SelectedDateChanged="toDate_SelectedDateChanged" Margin="2,2,2,2"/>
+                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Genders}" Margin="15,0,0,0" VerticalContentAlignment="Center">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Columns="2" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <ToggleButton Height="40" Content="{Binding Label}" Tag="{Binding}" Click="Gender_Click" Margin="4,4,4,4" Padding="4,4,4,4" FontSize="12"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
-                                
+
                                 <rv:RevealView Grid.Row="1" x:Name="_revealView" 
                                            SaveDashboard="RevealView_SaveDashboard"
                                            DataSourcesRequested="RevealView_DataSourcesRequested" />
                             </Grid>
-                           
-                     
-                            
+
+
+
                         </igDock:ContentPane>
                     </igDock:TabGroupPane>
                 </igDock:SplitPane>
             </igDock:DocumentContentHost>
         </igDock:XamDockManager>
-        <igWPF:XamDataGrid HorizontalAlignment="Left" Margin="2170,1099,0,0" VerticalAlignment="Top"/>
+        <igWPF:XamDataGrid HorizontalAlignment="Left" Margin="815,1099,0,0" VerticalAlignment="Top" Grid.Column="2"/>
 
     </Grid>
 </Window>
