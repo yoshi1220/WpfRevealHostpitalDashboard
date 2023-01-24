@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfReveal3
+namespace WpfRevealHealthCareDashboard
 {
     /// RangeからEFへのコンバーター
     /// Entity Frameworkで利用するエンティティクラスに読み込む

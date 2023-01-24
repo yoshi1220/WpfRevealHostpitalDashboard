@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using WpfReveal3.Models;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using WpfRevealHealthCareDashboard.Models;
 
-namespace WpfReveal3
+namespace WpfRevealHealthCareDashboard
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
@@ -61,11 +63,11 @@ namespace WpfReveal3
                     item.Doctor = sh.Cell(row, 6).Value.ToString();
                     item.Specialist = sh.Cell(row, 7).Value.ToString();
 
-                    this._hospitalPerformances.Add(item);
+                    _hospitalPerformances.Add(item);
                     row++;
                 }
 
-                this.XamDataGridHospitalPerformance.DataSource = this._hospitalPerformances;
+                XamDataGridHospitalPerformance.DataSource = _hospitalPerformances;
             }
 
 
@@ -90,11 +92,11 @@ namespace WpfReveal3
                     item.VisitReason = sh.Cell(row, 8).Value.ToString();
                     item.MedicationGiven = sh.Cell(row, 9).Value.ToString();
 
-                    this._patientDashboard.Add(item);
+                    _patientDashboard.Add(item);
                     row++;
                 }
 
-                this.XamDataGridPatientDashboard.DataSource = this._patientDashboard;
+                XamDataGridPatientDashboard.DataSource = _patientDashboard;
             }
         }
 
@@ -148,6 +150,72 @@ namespace WpfReveal3
             }
 
             e.SaveFinished();
+        }
+
+        private DateTime _from;
+        private DateTime _to;
+
+
+        private void toDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_revealView == null)
+            {
+                return;
+            }
+            var value = toDate.SelectedDate.Value;
+
+            var timer = new DispatcherTimer();
+            timer.Tick += (s, args) =>
+            {
+                _to = value;
+                UpdateDateFilter();
+                timer.Stop();
+            };
+            timer.Start();
+        }
+
+        private void fromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_revealView == null)
+            {
+                return;
+            }
+            var value = fromDate.SelectedDate.Value;
+
+            var timer = new DispatcherTimer();
+            timer.Tick += (s, args) =>
+            {
+                _from = value;
+                UpdateDateFilter();
+                timer.Stop();
+            };
+            timer.Start();
+        }
+
+
+        private void UpdateDateFilter()
+        {
+            var from = AdjustFromDate(_from);
+            var to = AdjustToDate(_to);
+            var range = new RVDateRange(from, to);
+            var filter = new RVDateDashboardFilter(RVDateFilterType.CustomRange, range);
+
+            _from = from;
+            _to = to;
+            //fromThumb.Value = _from;
+            //toThumb.Value = _to;
+
+            _revealView.Dashboard.DateFilter = filter;
+        }
+
+        private DateTime AdjustFromDate(DateTime from)
+        {
+            return new DateTime(from.Year, from.Month, 1);
+        }
+
+        private DateTime AdjustToDate(DateTime to)
+        {
+            return new DateTime(to.Year, to.Month, 1).AddMonths(1).AddDays(-1);
         }
     }
 

@@ -113,9 +113,9 @@
     <Reference Include="Infragistics4.Documents.Reports.v19.2, Version=19.2.20192.241, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\Infragistics4.Documents.Reports.v19.2.dll</HintPath>
     </Reference>
-    <Reference Include="InfragisticsWPF4.DataPresenter.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
-    <Reference Include="InfragisticsWPF4.DockManager.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
-    <Reference Include="InfragisticsWPF4.Editors.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.DataPresenter.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.DockManager.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.Editors.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="InfragisticsWPF4.Reveal.Documents.Core.v19.2, Version=19.2.20192.9, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\InfragisticsWPF4.Reveal.Documents.Core.v19.2.dll</HintPath>
     </Reference>
@@ -123,6 +123,7 @@
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.1.5\lib\net462\InfragisticsWPF4.Reveal.Documents.Excel.v19.2.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.v22.1, Version=22.1.20221.40, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="InfragisticsWPF4.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
     </Reference>
