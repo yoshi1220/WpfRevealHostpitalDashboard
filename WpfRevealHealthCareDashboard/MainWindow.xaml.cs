@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using Infragistics.Themes;
+using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
 using Reveal.Sdk;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -22,6 +24,7 @@ namespace WpfRevealHealthCareDashboard
     {
 
         string _defaultDirectory = Path.Combine(Environment.CurrentDirectory, "Dashboards");
+        string _currentFileName = @"Healthcare.xlsx";
 
         IList<HospitalPerformance> _hospitalPerformances = new List<HospitalPerformance>();
         IList<PatientDashboard> _patientDashboard = new List<PatientDashboard>();
@@ -34,6 +37,8 @@ namespace WpfRevealHealthCareDashboard
 
             //Reveal関連の初期化処理
             _revealView.Dashboard = new RVDashboard();
+            _revealView2.Dashboard = new RVDashboard();
+            _revealView2.StartInEditMode = true;
 
             RevealSdkSettings.LocalDataFilesRootFolder = Path.Combine(Environment.CurrentDirectory, "Data");
 
@@ -167,6 +172,73 @@ namespace WpfRevealHealthCareDashboard
             e.SaveFinished();
         }
 
+
+        private void RevealView2_DataSourcesRequested(object sender, Reveal.Sdk.DataSourcesRequestedEventArgs e)
+        {
+
+            var dataSources = new List<RVDashboardDataSource>();
+            var items = new List<RVDataSourceItem>();
+
+            Assembly myAssembly = Assembly.GetEntryAssembly();
+            string path = myAssembly.Location;
+            string Folder = Path.GetDirectoryName(path);
+
+            var names = Directory.GetFiles(Folder + @"\Data", "*");
+
+            foreach (string name in names)
+            {
+                var fileName = Path.GetFileName(name);
+
+                var localFileItem = new RVLocalFileDataSourceItem();
+                localFileItem.Uri = $"local:/{fileName}";
+
+                var excelDataSourceItem = new RVExcelDataSourceItem(localFileItem);
+                excelDataSourceItem.Title = $"{fileName}";
+                items.Add(excelDataSourceItem);
+            }
+
+            e.Callback(new RevealDataSources(dataSources, items, true));
+        }
+
+        private async void RevealView2_SaveDashboard(object sender, Reveal.Sdk.DashboardSaveEventArgs e)
+        {
+            if (e.IsSaveAs)
+            {
+                var saveDialog = new SaveFileDialog()
+                {
+                    DefaultExt = ".rdash",
+                    FileName = e.Name + ".rdash",
+                    Filter = "Reveal Dashboard (*.rdash)|*.rdash",
+                    InitialDirectory = _defaultDirectory
+                };
+
+                if (saveDialog.ShowDialog() == true)
+                {
+                    using (var stream = new FileStream(saveDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        var name = Path.GetFileNameWithoutExtension(saveDialog.FileName);
+                        var data = await e.SerializeWithNewName(name);
+                        await stream.WriteAsync(data, 0, data.Length);
+                    }
+                }
+            }
+            else
+            {
+                var path = Path.Combine(_defaultDirectory, $"{e.Name}.rdash");
+                var data = await e.Serialize();
+                using (var output = File.Open(path, FileMode.Open))
+                {
+                    output.Write(data, 0, data.Length);
+                }
+            }
+
+            e.SaveFinished();
+        }
+
+
+        /*
+         抽出条件
+         */
         private DateTime _from;
         private DateTime _to;
 
@@ -255,6 +327,27 @@ namespace WpfRevealHealthCareDashboard
             genderFilter.SelectedValues = _selectedGenders;
         }
 
+        private void SelectExcelFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // ダイアログのインスタンスを生成
+            var dialog = new OpenFileDialog()
+            {
+                DefaultExt = ".xlsx",
+                Filter = "Excel (*.xlsx)|*.xlsx",
+                InitialDirectory = _defaultDirectory
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                //Exeの場所にファイルをコピーする
+                Assembly myAssembly = Assembly.GetEntryAssembly();
+                string path = myAssembly.Location;
+                string Folder = Path.GetDirectoryName(path);
+                _currentFileName = Path.GetFileName(dialog.FileName);
+                FileSystem.CopyFile(dialog.FileName, Folder + @"\Data\" + _currentFileName, true);
+            }
+
+        }
     }
 
 

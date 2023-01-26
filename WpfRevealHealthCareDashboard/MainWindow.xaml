@@ -103,6 +103,21 @@
 
 
                         </igDock:ContentPane>
+                        <igDock:ContentPane Header="Any Excel File">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="AliceBlue" HorizontalAlignment="Stretch">
+                                    <Button x:Name="SelectExcelFileButton" Click="SelectExcelFileButton_Click" Margin="4,4,4,4">対象ファイル追加</Button>                                   
+                                </StackPanel>
+                                <rv:RevealView x:Name="_revealView2" Grid.Row="1"
+                                           SaveDashboard="RevealView2_SaveDashboard"
+                                           DataSourcesRequested="RevealView2_DataSourcesRequested" />
+                            </Grid>
+                          
+                        </igDock:ContentPane>
                     </igDock:TabGroupPane>
                 </igDock:SplitPane>
             </igDock:DocumentContentHost>
