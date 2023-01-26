@@ -124,6 +124,7 @@
     <Reference Include="InfragisticsWPF4.Reveal.Documents.Excel.v19.2, Version=19.2.20192.9, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>..\packages\Reveal.Sdk.Wpf.Trial.1.3.0\lib\net462\InfragisticsWPF4.Reveal.Documents.Excel.v19.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Ribbon.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="InfragisticsWPF4.Themes.Office2013.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="InfragisticsWPF4.v22.2, Version=22.2.20222.19, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">

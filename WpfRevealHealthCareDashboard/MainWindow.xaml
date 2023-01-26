@@ -8,13 +8,41 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="980" Width="1800" Loaded="Window_Loaded">
+
     <Grid >
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="265*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <igDock:XamDockManager Name="xamDockManager1"  Theme="Office2013" Grid.ColumnSpan="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <igWPF:XamRibbon Grid.Row="0" QuickAccessToolbarLocation="AboveRibbon" Theme="Office2013">
+            <igWPF:RibbonTabItem Header="Home">
+                <igWPF:RibbonGroup>
+                    <igWPF:ButtonTool Caption="追加"></igWPF:ButtonTool>                  
+                </igWPF:RibbonGroup>
+                <igWPF:RibbonGroup>
+                    <igWPF:ButtonTool Caption="更新"></igWPF:ButtonTool>
+                </igWPF:RibbonGroup>
+                <igWPF:RibbonGroup>
+                    <igWPF:ButtonTool Caption="削除"></igWPF:ButtonTool>
+                </igWPF:RibbonGroup>
+            </igWPF:RibbonTabItem>
+            <igWPF:RibbonTabItem Header="サンプル">
+                <igWPF:RibbonGroup>
+                    <igWPF:ButtonTool Caption="サンプルボタン"></igWPF:ButtonTool>
+                </igWPF:RibbonGroup>
+                <igWPF:RibbonGroup>
+                    <igWPF:RadioButtonTool Caption="選択1"></igWPF:RadioButtonTool>
+                    <igWPF:RadioButtonTool Caption="選択2"></igWPF:RadioButtonTool>
+                </igWPF:RibbonGroup>
+            </igWPF:RibbonTabItem>
+        </igWPF:XamRibbon>
+
+        <igDock:XamDockManager Grid.Row="1" Name="xamDockManager1"  Theme="Office2013" Grid.ColumnSpan="3">
             <igDock:DocumentContentHost>
                 <!--Adding a SplitPane-->
                 <igDock:SplitPane>
@@ -35,7 +63,7 @@
                                 </igWPF:XamDataGrid.FieldSettings>
                             </igWPF:XamDataGrid>
                         </igDock:ContentPane>
-                       
+
                     </igDock:TabGroupPane>
                 </igDock:SplitPane>
                 <igDock:SplitPane>
@@ -82,4 +110,5 @@
         <igWPF:XamDataGrid HorizontalAlignment="Left" Margin="815,1099,0,0" VerticalAlignment="Top" Grid.Column="2"/>
 
     </Grid>
+
 </Window>
